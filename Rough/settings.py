@@ -18,11 +18,7 @@ ERROR = 2  # Backlash error in DEGREES
 
 # =========-=========-=========-=========-=========-=========-=========-
 # Step 2: Define variables for the pins for each motor
-# Example:
-# smflpn = <an integer denoting the pin number> # Steering Motor Forward Left Plus pin Number
-# Note: You need not use this particular naming patterns of the variables, but be
-#       consistent with your own pattern and clearly define it (in the *Convensions*
-#       section at the README.md file) before using.
+#
 #
 #    We have two types of motors, Steering motors and Driving motors.
 # In each leg we will have a potentiometer to know the current position of the steering
@@ -46,19 +42,49 @@ ERROR = 2  # Backlash error in DEGREES
 #       5. Assign all(6) pins of the potentiometer to the analog input pins.
 #
 
+#Refer 'convensions' for labelling conventions used below
 
+#Plus motors--Digital PWM
+# =============================================================================
+# sm_f_l_p = D2
+# dm_f_l_p = D3
+# sm_f_r_p = D4
+# dm_f_r_p = D5
+# sm_m_l_p = D6
+# dm_m_l_p = D7
+# sm_m_r_p = D8
+# dm_m_r_p = D9
+# sm_b_l_p = D10
+# dm_b_l_p = D11
+# sm_b_r_p = D12
+# dm_b_r_p = D13
+# =============================================================================
 
+#Minus motors--Digital
+# =============================================================================
+# sm_f_l_n = D22
+# dm_f_l_n = D23
+# sm_f_r_n = D24
+# dm_f_r_n = D25
+# sm_m_l_n = D26
+# dm_m_l_n = D27
+# sm_m_r_n = D28
+# dm_m_r_n = D29
+# sm_b_l_n = D30
+# dm_b_l_n = D31
+# sm_b_r_n = D32
+# dm_b_r_n = D33
+# =============================================================================
 
-
-
-
-
-
-
-
-
-
-
+#Potentiometers--Analog
+#==============================================================================
+# pr_f_l = A0
+# pr_f_r = A1
+# pr_m_l = A2
+# pr_m_r = A3
+# pr_b_l = A4
+# pr_b_r = A5
+# =============================================================================
 
 # =========-=========-=========-=========-=========-=========-=========-
 # Step 3: Initialise the board and all the pins to be used as mentioned in Step 2.
@@ -67,26 +93,45 @@ board = ArduinoMega(PORT)  # Initialising the Arduino Mega
 it = util.Iterator(board)  # Initialising the iterator to read the data from the board.
 it.start()  # Starting the iterator. These two lines are needed if you want to take inputs.
 
-# initialise 12 non-PWM digital output pins for the minus sides of the 12 motors
-# Example:
-# smflp = board.get_pin("d:" + str(smflpn) + ":o") # Steering Motor Forward Left Plus pin
-#
 
 
+# initialising 12 PWM digital output pins for the plus sides of the 12 motors
+sm_f_l_p = board.get_pin('d:2:p') 
+dm_f_l_p = board.get_pin('d:3:p')
+sm_f_r_p = board.get_pin('d:4:p')
+dm_f_r_p = board.get_pin('d:5:p')
+sm_m_l_p = board.get_pin('d:6:p')
+dm_m_l_p = board.get_pin('d:7:p')
+sm_m_r_p = board.get_pin('d:8:p')
+dm_m_r_p = board.get_pin('d:9:p')
+sm_b_l_p = board.get_pin('d:10:p')
+dm_b_l_p = board.get_pin('d:11:p')
+sm_b_r_p = board.get_pin('d:12:p')
+dm_b_r_p = board.get_pin('d:13:p')
 
 
+# initialising 12 non-PWM digital output pins for the minus sides of the 12 motors
+sm_f_l_n = board.get_pin('d:22:o') 
+dm_f_l_n = board.get_pin('d:23:o')
+sm_f_r_n = board.get_pin('d:24:o')
+dm_f_r_n = board.get_pin('d:25:o')
+sm_m_l_n = board.get_pin('d:26:o')
+dm_m_l_n = board.get_pin('d:27:o')
+sm_m_r_n = board.get_pin('d:28:o')
+dm_m_r_n = board.get_pin('d:29:o')
+sm_b_l_n = board.get_pin('d:30:o')
+dm_b_l_n = board.get_pin('d:31:o')
+sm_b_r_n = board.get_pin('d:32:o')
+dm_b_r_n = board.get_pin('d:33:o')
 
-# initialise 12 PWM digital output pins for the plus sides of the 12 motors
-# Do here similarly as the above example
-#
+# initialising 6 analog input pins for the potentiometer
+pr_f_l = board.get_pin('a:54:i')
+pr_f_r = board.get_pin('a:55:i')
+pr_m_l = board.get_pin('a:56:i')
+pr_m_r = board.get_pin('a:57:i') 
+pr_b_l = board.get_pin('a:58:i') 
+pr_b_r = board.get_pin('a:59:i') 
 
-
-
-
-
-# initialise 6 analog input pins for the potentiometer
-# Do here similarly as the above example
-#
 
 
 
