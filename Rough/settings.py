@@ -46,44 +46,44 @@ ERROR = 2  # Backlash error in DEGREES
 
 #Plus motors--Digital PWM
 # =============================================================================
-# sm_f_l_p = D2
-# dm_f_l_p = D3
-# sm_f_r_p = D4
-# dm_f_r_p = D5
-# sm_m_l_p = D6
-# dm_m_l_p = D7
-# sm_m_r_p = D8
-# dm_m_r_p = D9
-# sm_b_l_p = D10
-# dm_b_l_p = D11
-# sm_b_r_p = D12
-# dm_b_r_p = D13
+# sm_fl_p = D2
+# dm_fl_p = D3
+# sm_fr_p = D4
+# dm_fr_p = D5
+# sm_ml_p = D6
+# dm_ml_p = D7
+# sm_mr_p = D8
+# dm_mr_p = D9
+# sm_bl_p = D10
+# dm_bl_p = D11
+# sm_br_p = D12
+# dm_br_p = D13
 # =============================================================================
 
 #Minus motors--Digital
 # =============================================================================
-# sm_f_l_n = D22
-# dm_f_l_n = D23
-# sm_f_r_n = D24
-# dm_f_r_n = D25
-# sm_m_l_n = D26
-# dm_m_l_n = D27
-# sm_m_r_n = D28
-# dm_m_r_n = D29
-# sm_b_l_n = D30
-# dm_b_l_n = D31
-# sm_b_r_n = D32
-# dm_b_r_n = D33
+# sm_fl_n = D22
+# dm_fl_n = D23
+# sm_fr_n = D24
+# dm_fr_n = D25
+# sm_ml_n = D26
+# dm_ml_n = D27
+# sm_mr_n = D28
+# dm_mr_n = D29
+# sm_bl_n = D30
+# dm_bl_n = D31
+# sm_br_n = D32
+# dm_br_n = D33
 # =============================================================================
 
 #Potentiometers--Analog
 #==============================================================================
-# pr_f_l = A0
-# pr_f_r = A1
-# pr_m_l = A2
-# pr_m_r = A3
-# pr_b_l = A4
-# pr_b_r = A5
+# pr_fl = A0
+# pr_fr = A1
+# pr_ml = A2
+# pr_mr = A3
+# pr_bl = A4
+# pr_br = A5
 # =============================================================================
 
 # =========-=========-=========-=========-=========-=========-=========-
@@ -96,46 +96,38 @@ it.start()  # Starting the iterator. These two lines are needed if you want to t
 
 
 # initialising 12 PWM digital output pins for the plus sides of the 12 motors
-sm_f_l_p = board.get_pin('d:2:p') 
-dm_f_l_p = board.get_pin('d:3:p')
-sm_f_r_p = board.get_pin('d:4:p')
-dm_f_r_p = board.get_pin('d:5:p')
-sm_m_l_p = board.get_pin('d:6:p')
-dm_m_l_p = board.get_pin('d:7:p')
-sm_m_r_p = board.get_pin('d:8:p')
-dm_m_r_p = board.get_pin('d:9:p')
-sm_b_l_p = board.get_pin('d:10:p')
-dm_b_l_p = board.get_pin('d:11:p')
-sm_b_r_p = board.get_pin('d:12:p')
-dm_b_r_p = board.get_pin('d:13:p')
+sm_fl_p = board.get_pin('d:2:p') 
+dm_fl_p = board.get_pin('d:3:p')
+sm_fr_p = board.get_pin('d:4:p')
+dm_fr_p = board.get_pin('d:5:p')
+sm_ml_p = board.get_pin('d:6:p')
+dm_ml_p = board.get_pin('d:7:p')
+sm_mr_p = board.get_pin('d:8:p')
+dm_mr_p = board.get_pin('d:9:p')
+sm_bl_p = board.get_pin('d:10:p')
+dm_bl_p = board.get_pin('d:11:p')
+sm_br_p = board.get_pin('d:12:p')
+dm_br_p = board.get_pin('d:13:p')
 
 
 # initialising 12 non-PWM digital output pins for the minus sides of the 12 motors
-sm_f_l_n = board.get_pin('d:22:o') 
-dm_f_l_n = board.get_pin('d:23:o')
-sm_f_r_n = board.get_pin('d:24:o')
-dm_f_r_n = board.get_pin('d:25:o')
-sm_m_l_n = board.get_pin('d:26:o')
-dm_m_l_n = board.get_pin('d:27:o')
-sm_m_r_n = board.get_pin('d:28:o')
-dm_m_r_n = board.get_pin('d:29:o')
-sm_b_l_n = board.get_pin('d:30:o')
-dm_b_l_n = board.get_pin('d:31:o')
-sm_b_r_n = board.get_pin('d:32:o')
-dm_b_r_n = board.get_pin('d:33:o')
+sm_fl_n = board.get_pin('d:22:o') 
+dm_fl_n = board.get_pin('d:23:o')
+sm_fr_n = board.get_pin('d:24:o')
+dm_fr_n = board.get_pin('d:25:o')
+sm_ml_n = board.get_pin('d:26:o')
+dm_ml_n = board.get_pin('d:27:o')
+sm_mr_n = board.get_pin('d:28:o')
+dm_mr_n = board.get_pin('d:29:o')
+sm_bl_n = board.get_pin('d:30:o')
+dm_bl_n = board.get_pin('d:31:o')
+sm_br_n = board.get_pin('d:32:o')
+dm_br_n = board.get_pin('d:33:o')
 
 # initialising 6 analog input pins for the potentiometer
-pr_f_l = board.get_pin('a:54:i')
-pr_f_r = board.get_pin('a:55:i')
-pr_m_l = board.get_pin('a:56:i')
-pr_m_r = board.get_pin('a:57:i') 
-pr_b_l = board.get_pin('a:58:i') 
-pr_b_r = board.get_pin('a:59:i') 
-
-
-
-
-
-
-
-
+pr_fl = board.get_pin('a:0:i')
+pr_fr = board.get_pin('a:1:i')
+pr_ml = board.get_pin('a:2:i')
+pr_mr = board.get_pin('a:3:i') 
+pr_bl = board.get_pin('a:4:i') 
+pr_br = board.get_pin('a:5:i') 

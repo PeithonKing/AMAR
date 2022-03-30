@@ -2,7 +2,7 @@
 # Rules
 
 1. Code for steering the leg
-2. Follow PEP (can ignore E501 warning). You can take help of the Flake8 Python Library to do this. Command: ```flake8 leg.py --ignore=E501```
+2. Follow PEP (can ignore E501 warning). You can take help of the Flake8 Python Library to do this. Command: ```flake8 <filename> --ignore=E501```
 3. Use a lot of comments to explain your code.
 4. Every function and method should start with a docstring.
 
@@ -16,14 +16,14 @@
 
 1. {Aritra} For the steering motors, positive rotation is anticlockwise and negative rotation is clockwise. So, we define the terminals of the motor positive and negative according to that. **i.e.:** if we keep the positive terminal at higher potensial and negative terminal at lower potenial, then the motor will rotate in anticlockwise direction. If we keep the negative terminal at higher potenial and positive terminal at lower potenial, then the motor will rotate in clockwise direction. All these are done keeping the terminal side of the motor upwards and the shaft side downwards.
 
-2. {Mahesh} Pin convention format: (<Component>_<Row>_<Column>_<Sign>). Note that potentiometer labels have only 3 parts as <Sign> is not required. 
+2. {Mahesh} Pin convention format: (<Component>_<Row><Column>_<Sign>). Note that potentiometer labels have only 3 parts as <Sign> is not required. 
         Abbreviations:
             Component:  sm-steering motor, dm-driving motor, pr-potentiometer
             Row:        f-Front, m-middle , b-back
             Column:     l-left, r-right
             Sign:       p-positive (plus), n-negative (minus)    
-    Eg: sm_f_l_p stands for steering motor front left positive
-        pr_f_r stands for potentiometer front right
+    Eg: sm_fl_p stands for steering motor front left positive
+        pr_fr stands for potentiometer front right
 
 # Roles
 
