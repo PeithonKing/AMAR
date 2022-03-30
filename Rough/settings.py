@@ -18,11 +18,7 @@ ERROR = 2  # Backlash error in DEGREES
 
 # =========-=========-=========-=========-=========-=========-=========-
 # Step 2: Define variables for the pins for each motor
-# Example:
-# smflpn = <an integer denoting the pin number> # Steering Motor Forward Left Plus pin Number
-# Note: You need not use this particular naming patterns of the variables, but be
-#       consistent with your own pattern and clearly define it (in the *Convensions*
-#       section at the README.md file) before using.
+#
 #
 #    We have two types of motors, Steering motors and Driving motors.
 # In each leg we will have a potentiometer to know the current position of the steering
@@ -97,7 +93,9 @@ board = ArduinoMega(PORT)  # Initialising the Arduino Mega
 it = util.Iterator(board)  # Initialising the iterator to read the data from the board.
 it.start()  # Starting the iterator. These two lines are needed if you want to take inputs.
 
-# initialise 12 non-PWM digital output pins for the minus sides of the 12 motors
+
+
+# initialising 12 PWM digital output pins for the plus sides of the 12 motors
 sm_f_l_p = board.get_pin('d:2:p') 
 dm_f_l_p = board.get_pin('d:3:p')
 sm_f_r_p = board.get_pin('d:4:p')
@@ -111,6 +109,8 @@ dm_b_l_p = board.get_pin('d:11:p')
 sm_b_r_p = board.get_pin('d:12:p')
 dm_b_r_p = board.get_pin('d:13:p')
 
+
+# initialising 12 non-PWM digital output pins for the minus sides of the 12 motors
 sm_f_l_n = board.get_pin('d:22:o') 
 dm_f_l_n = board.get_pin('d:23:o')
 sm_f_r_n = board.get_pin('d:24:o')
@@ -124,6 +124,7 @@ dm_b_l_n = board.get_pin('d:31:o')
 sm_b_r_n = board.get_pin('d:32:o')
 dm_b_r_n = board.get_pin('d:33:o')
 
+# initialising 6 analog input pins for the potentiometer
 pr_f_l = board.get_pin('a:54:i')
 pr_f_r = board.get_pin('a:55:i')
 pr_m_l = board.get_pin('a:56:i')
@@ -131,23 +132,6 @@ pr_m_r = board.get_pin('a:57:i')
 pr_b_l = board.get_pin('a:58:i') 
 pr_b_r = board.get_pin('a:59:i') 
 
-#
-
-
-
-
-
-# initialise 12 PWM digital output pins for the plus sides of the 12 motors
-# Do here similarly as the above example
-#
-
-
-
-
-
-# initialise 6 analog input pins for the potentiometer
-# Do here similarly as the above example
-#
 
 
 
