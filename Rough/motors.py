@@ -25,6 +25,12 @@ class SteeringMotor:
     Methods
     -------
         # complete this
+        get_position() :
+            Returns current of the steering motor in degrees.
+        move(v,t=1) : 
+            Dynamically rotates the steering motor base on velocity and time.
+        goto(position) :
+            Rotates the motor to a specific angle at full speed.
     """
 
     def __init__(self, plus, minus, pot, name="Unknown"):
@@ -72,7 +78,7 @@ class SteeringMotor:
         # write the appropriate docstrings here
         # write code for moving the motor clockwise for t seconds at speed v (v ∈ [-100, 100]).
         # Meaning of "Speed":
-        #       The potensial difference between self.plus and self.minus = 5v/100 = pd (say)
+        #       The potenial difference between self.plus and self.minus = 5v/100 = pd (say)
         # If v is positive, the motor will move counterclockwise and self.minus will be at 0V and
         # self.plus will be at pd. Similarly if v is negative, the motor will move clockwise
         # and self.minus will be at 5V and self.plus will be at (5-pd)V. (don't forget self.minus can
@@ -99,7 +105,37 @@ class SteeringMotor:
 # =========-=========-=========-=========-=========-=========-=========-
 # Step 5: similarly write a class for the Driving Motors
 class DrivingMotor:
-    # write the docstring here 
+    """DrivingMotor(plus, minus, pot)
+
+    A class to represent a Steering Motor.
+
+    Attributes
+    ----------
+    plus : type = pyfirmata.pyfirmata.Pin
+        The plus pin of the steering motor.
+        This is a PWM output pin.
+    minus : type = pyfirmata.pyfirmata.Pin
+        The minus pin of the steering motor.
+        This is a non-PWM output pin.
+    pot : type = pyfirmata.pyfirmata.Pin
+        The input pin which the potentiometer is connected to.
+    name : str
+        This is a string defining position of this steering motor.
+        This variable will only help in debugging purpose.
+        for example, for the front left steering motor:
+            name = "Front Left"
+
+    Methods
+    -------
+        # complete this
+        forward(speed) :
+            Rotates the motor such that it moves forward.
+        backward(speed) :
+            Rotates the motor such that it moves backward.
+        stop() :
+            Stops any rotation in the motor.
+    """
+
     def __init__(self, plus, minus, steering):
         # Docstring
         self.plus = plus
