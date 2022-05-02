@@ -27,7 +27,7 @@ class SteeringMotor:
         # complete this
         get_position() :
             Returns current of the steering motor in degrees.
-        move(v,t=1) : 
+        move(v,t=1) :
             Dynamically rotates the steering motor base on velocity and time.
         goto(position) :
             Rotates the motor to a specific angle at full speed.
@@ -75,6 +75,16 @@ class SteeringMotor:
         return 360 * (x - ll) / (ul - ll)
 
     def move(self, v, t=1):  # t in seconds
+        """
+        Moves the motors base on given speed for a certain time
+
+        Parameters
+        ----------
+        v : type
+
+        t : type
+
+        """
         # write the appropriate docstrings here
         # write code for moving the motor clockwise for t seconds at speed v (v ∈ [-100, 100]).
         # Meaning of "Speed":
@@ -89,10 +99,18 @@ class SteeringMotor:
 
     def goto(self, position):
         started_from = self.get_position()
+        """
+        Rotates the motor to a certain angular position
+
+        Parameters
+        ----------
+        position : type
+            The angular position to direct at
+        """
         # write the appropriate docstrings here
         # position is a float/integer between 0 and 360 degrees
         # objective of this function is to move the steering motor to the required position
-        # 
+        #
         # Process: Start by calculating the difference between the current position and the
         # required position (say θ degrees). Call the move() function in full speed
         # (v = 100 if θ > 0 and v = -100 if θ < 0) for t = 1s. Then proportionally decrease the speed
@@ -105,6 +123,7 @@ class SteeringMotor:
 # =========-=========-=========-=========-=========-=========-=========-
 # Step 5: similarly write a class for the Driving Motors
 class DrivingMotor:
+    # write the docstrings here
     """DrivingMotor(plus, minus, pot)
 
     A class to represent a Steering Motor.
@@ -117,46 +136,77 @@ class DrivingMotor:
     minus : type = pyfirmata.pyfirmata.Pin
         The minus pin of the steering motor.
         This is a non-PWM output pin.
-    pot : type = pyfirmata.pyfirmata.Pin
-        The input pin which the potentiometer is connected to.
-    name : str
-        This is a string defining position of this steering motor.
-        This variable will only help in debugging purpose.
-        for example, for the front left steering motor:
-            name = "Front Left"
+    steering : type = class '__main__.SteeringMotor'
+        The steering motor instance corresponding to the driving motor.
+
 
     Methods
     -------
         # complete this
         forward(speed) :
-            Rotates the motor such that it moves forward.
+            Rotates the motor with given speed to move forward.
         backward(speed) :
-            Rotates the motor such that it moves backward.
+            Rotates the motor with given speed to move backward.
         stop() :
-            Stops any rotation in the motor.
+            Stops any movement in the motor.
     """
 
     def __init__(self, plus, minus, steering):
+        """
+        Construct all the necessary attributes of a driving wheel.
+        This function runs every time an instance of a driving motor is created.
+
+        Parameters
+        ----------
+        plus : type = pyfirmata.pyfirmata.Pin
+            The plus pin of the steering motor.
+            This is a PWM output pin.
+        minus : type = pyfirmata.pyfirmata.Pin
+            The minus pin of the steering motor.
+            This is a non-PWM output pin.
+        steering : type = class '__main__.SteeringMotor'
+            The steering motor instance corresponding to the driving motor.
+
+        """
         # Docstring
         self.plus = plus
         self.minus = minus
         self.steering = steering  # the instance of the SteeringMotor() corresponding to this motor will be passed
         self.name = steering.name
-    
+
     def forward(self, speed):
+        """
+        Rotates the motor to move the wheels forward
+
+        Parameters
+        ----------
+        speed : type
+            The speed at which the motor rotates
+        """
         # complete and add docstring
         # starts this driving motor in forward direction in speed = speed
         # Note: let p = steering.get_position(). if p>180, forward will be equal to p<180 backward.
-        # 
+        #
         pass
-    
+
     def backward(self, speed):
+        """
+        Rotates the motor to move the wheels backward
+
+        Parameters
+        ----------
+        speed : type
+            The speed at which the motor rotates
+        """
         # complete and add docstring
         # starts this driving motor in backward direction in speed = speed
-        # 
+        #
         pass
-    
+
     def stop(self):
+        """
+        Stops any movement in the motors
+        """
         # complete and add docstring
         # stops the motor whichever direction it was moving in.
         pass
