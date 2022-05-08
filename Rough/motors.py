@@ -98,7 +98,7 @@ class SteeringMotor:
         ----------
         v : type float
             Velocity of motor from speed 100 counterclockwise to 100 clockwise
-            Ranges            from       100          to        -100
+            Ranges from 100 to -100
         t : type float
             Duration (in seconds) for which the the motor rotates
 
@@ -106,8 +106,8 @@ class SteeringMotor:
         ---------
         pd : type float
             Potential that has to be be given to the plus(pwm pin). Calculates as-
-                        pd = v/100.0      to implement positive/counterclockwise velocity
-                        pd = 1+v/100.0    to implement negative/cloclwise velocity (*v is itself negative)
+                    pd = v/100.0      to implement positive/counterclockwise velocity
+                    pd = 1+v/100.0    to implement negative/cloclwise velocity (*v is itself negative)
             Note: PWM output in pyfirmata takes values from 0 to 1
                   This translates to 0V to 5V in Arduino
 
@@ -245,7 +245,7 @@ class DrivingMotor:
         ---------
         pd : type float
         Potential that has to be be given to the plus(pwm pin). Calculates as-
-                        pd = speed/100.0      to implement positive/counterclockwise/forward velocity
+                    pd = speed/100.0      to implement positive/counterclockwise/forward velocity
             Note: PWM output in pyfirmata takes values from 0 to 1
                   This translates to 0V to 5V in Arduino
 
@@ -276,7 +276,7 @@ class DrivingMotor:
         ---------
         pd : type float
         Potential that has to be be given to the plus(pwm pin). Calculates as-
-                        pd = 1-speed/100.0    to implement negative/cloclwise/backward velocity
+                    pd = 1-speed/100.0    to implement negative/cloclwise/backward velocity
             Note: PWM output in pyfirmata takes values from 0 to 1
                   This translates to 0V to 5V in Arduino
 
@@ -294,7 +294,7 @@ class DrivingMotor:
 
     def stop(self):
         """
-        Stops any movement in the driving motors
+        Stops any movement in the driving motor
 
         Parameters
         ----------
