@@ -129,7 +129,7 @@ class SteeringMotor:
             pd = v / 100.0        # higher potential for PWM(plus) pin
             self.plus.write(pd)
             self.minus.write(0)
-        else:                   # negative velocity -> cloclwise
+        else:                   # negative velocity -> clockwise
             pd = 1 + v / 100.0      # lower potential for PWM(plus) pin (*v is itself negative)
             self.plus.write(pd)
             self.minus.write(1)
@@ -151,9 +151,9 @@ class SteeringMotor:
         difference : type float
             The required angle to rotate.
             If difference > 0
-                then move counter clockwise by difference°
+                then move counter clockwise by difference (in degrees)
             If difference < 0
-                then move clockwise by diffrence°
+                then move clockwise by diffrence (in degrees)
 
         Returns
         -------
@@ -307,6 +307,7 @@ class DrivingMotor:
         Returns
         -------
         Nothing
+
         """
         # complete and add docstring
         # stops the motor whichever direction it was moving in.
