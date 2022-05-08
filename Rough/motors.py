@@ -26,7 +26,7 @@ class SteeringMotor:
     -------
         # complete this
         get_position() :
-            Returns current of the steering motor in degrees.
+            Returns current position of the steering motor in degrees.
         move(v,t=1) :
             Dynamically rotates the steering motor base on velocity and time.
         goto(position) :
@@ -63,6 +63,20 @@ class SteeringMotor:
         """
         Reads the potentiometer value and Returns the current position of the
         steering motor in degrees. Its value is between 0 and 360 degrees.
+
+        Parameters
+        ----------
+        None
+
+        Variables
+        ---------
+        ll :
+
+        ul :
+
+        Returns
+        -------
+        The angle (float) of the steering motor
         """
         # some code will be here which will do the job, but you don't need to
         # do this right now! It will be done once the Rover is up and running.
@@ -76,13 +90,30 @@ class SteeringMotor:
 
     def move(self, v, t=1):  # t in seconds
         """
-        Moves the motors base on given speed for a certain time
+        Moves the motors base on given speed for a certain time.
+        We have assumed that positive velocity is counterclockwise and
+        negative velocity is clockwise
 
         Parameters
         ----------
-        v : type
+        v : type float
+            Velocity of motor from speed 100 counterclockwise to 100 clockwise
+            Ranges            from       100          to        -100
+        t : type float
+            Duration (in seconds) for which the the motor rotates
 
-        t : type
+        Variables
+        ---------
+        pd : type float
+            Potential that has to be be given to the plus(pwm pin). Calculates as-
+                        pd = v/100.0      to implement positive/counterclockwise velocity
+                        pd = 1+v/100.0    to implement negative/cloclwise velocity (*v is itself negative)
+            Note: PWM output in pyfirmata takes values from 0 to 1
+                  This translates to 0V to 5V in Arduino
+
+        Returns
+        -------
+        Nothing
 
         """
         # write the appropriate docstrings here
@@ -94,19 +125,42 @@ class SteeringMotor:
         # and self.minus will be at 5V and self.plus will be at (5-pd)V. (don't forget self.minus can
         # only have binary values, 0V  and 5V and self.plus can only have values between 0V and 5V)
         #
-
-        pass
+        if v >= 0:              # positve velocity -> counterclockwise
+            pd = v / 100.0        # higher potential for PWM(plus) pin
+            self.plus.write(pd)
+            self.minus.write(0)
+        else:                   # negative velocity -> cloclwise
+            pd = 1 + v / 100.0      # lower potential for PWM(plus) pin (*v is itself negative)
+            self.plus.write(pd)
+            self.minus.write(1)
+        time.sleep(t)           # moves till this time ends
+        self.plus.write(0)      # the values are reinitialized to 0
+        self.minus.write(0)
 
     def goto(self, position):
-        started_from = self.get_position()
         """
         Rotates the motor to a certain angular position
 
         Parameters
         ----------
-        position : type
+        position : type float
             The angular position to direct at
+
+        Variables
+        ---------
+        difference : type float
+            The required angle to rotate.
+            If difference > 0
+                then move counter clockwise by difference°
+            If difference < 0
+                then move clockwise by diffrence°
+
+        Returns
+        -------
+        Nothing
+
         """
+        started_from = self.get_position()
         # write the appropriate docstrings here
         # position is a float/integer between 0 and 360 degrees
         # objective of this function is to move the steering motor to the required position
@@ -117,6 +171,9 @@ class SteeringMotor:
         # of the motor with respect to the new distance (θnew) and call move(). Continue until the
         # [required position ± ERROR (defined at the beginning)] is reached.
         #
+        while():
+            difference = position - self.get_position
+            move(v)     # incomplete
         print(f"The {self.name} steering motor moved to {round(position, 2)}° from {round(started_from, 2)}°")  # comment this line on completion
 
 
@@ -126,15 +183,15 @@ class DrivingMotor:
     # write the docstrings here
     """DrivingMotor(plus, minus, pot)
 
-    A class to represent a Steering Motor.
+    A class to represent a Driving Motor.
 
     Attributes
     ----------
     plus : type = pyfirmata.pyfirmata.Pin
-        The plus pin of the steering motor.
+        The plus pin of the driving motor.
         This is a PWM output pin.
     minus : type = pyfirmata.pyfirmata.Pin
-        The minus pin of the steering motor.
+        The minus pin of the driving motor.
         This is a non-PWM output pin.
     steering : type = class '__main__.SteeringMotor'
         The steering motor instance corresponding to the driving motor.
@@ -176,40 +233,85 @@ class DrivingMotor:
 
     def forward(self, speed):
         """
-        Rotates the motor to move the wheels forward
+        Rotates the driving motor to move wheel forward
 
         Parameters
         ----------
-        speed : type
-            The speed at which the motor rotates
+        speed : type float
+            The speed at which the motor rotates.
+                Ranges form 0 to 100.
+
+        Variables
+        ---------
+        pd : type float
+        Potential that has to be be given to the plus(pwm pin). Calculates as-
+                        pd = speed/100.0      to implement positive/counterclockwise/forward velocity
+            Note: PWM output in pyfirmata takes values from 0 to 1
+                  This translates to 0V to 5V in Arduino
+
+        Returns
+        -------
+        Nothing
+
         """
         # complete and add docstring
         # starts this driving motor in forward direction in speed = speed
         # Note: let p = steering.get_position(). if p>180, forward will be equal to p<180 backward.
         #
-        pass
+        pd = speed / 100.0
+        self.plus.write(pd)     # higer potential for PWM(plus) pin
+        self.minus.write(0)
 
     def backward(self, speed):
         """
-        Rotates the motor to move the wheels backward
+        Rotates the driving motor to move wheel backward
 
         Parameters
         ----------
-        speed : type
+        speed : type float
             The speed at which the motor rotates
+                Ranges from 0 to 100 ???? or -100
+
+        Variables
+        ---------
+        pd : type float
+        Potential that has to be be given to the plus(pwm pin). Calculates as-
+                        pd = 1-speed/100.0    to implement negative/cloclwise/backward velocity
+            Note: PWM output in pyfirmata takes values from 0 to 1
+                  This translates to 0V to 5V in Arduino
+
+        Returns
+        -------
+        Nothing
+
         """
         # complete and add docstring
         # starts this driving motor in backward direction in speed = speed
         #
-        pass
+        pd = 1 - speed / 100.0
+        self.plus.write(pd)     # higer potential for PWM(plus) pin
+        self.minus.write(1)
 
     def stop(self):
         """
-        Stops any movement in the motors
+        Stops any movement in the driving motors
+
+        Parameters
+        ----------
+        None
+
+        Variables
+        ---------
+        None
+
+        Returns
+        -------
+        Nothing
         """
         # complete and add docstring
         # stops the motor whichever direction it was moving in.
-        pass
+        self.plus.write(0)
+        self.minus.write(0)
 
 
 if __name__ == "__main__":
