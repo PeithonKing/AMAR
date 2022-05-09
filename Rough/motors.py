@@ -171,7 +171,8 @@ class SteeringMotor:
         # of the motor with respect to the new distance (θnew) and call move(). Continue until the
         # [required position ± ERROR (defined at the beginning)] is reached.
         #
-        while():
+        v = 100   # initializing to full speed
+        for i in range(0, 1, 0.2):
             difference = position - self.get_position
             move(v)     # incomplete
         print(f"The {self.name} steering motor moved to {round(position, 2)}° from {round(started_from, 2)}°")  # comment this line on completion
@@ -318,6 +319,23 @@ class DrivingMotor:
 if __name__ == "__main__":
     from settings import *
     # fl = SteeringMotor(smflp, smflm, smflpot, "Front Left")  # initialising the front left steering motor
-    fl = SteeringMotor(None, None, None, "Front Left")  # initialising the front left steering motor
+
+    # __FRONT MOTORS__
+    # initialising the front left and front right steering motors
+    SM_FL, SM_FR = SteeringMotor(sm_fl_p, sm_fl_n, pr_fl, "Front Left"), SteeringMotor(sm_fr_p, sm_fr_n, pr_fr, "Front Right")
+    # initialising the front left and front right driving motors
+    DM_FL, DM_FR = DrivingMotor(dm_fl_p, dm_fl_n, SM_FL), DrivingMotor(dm_fr_p, dm_fr_n, SM_FR)
+
+    # __MIDDLE MOTORS__
+    # initialising the middle left and middle right steering motors
+    SM_ML, SM_MR = SteeringMotor(sm_ml_p, sm_ml_n, pr_ml, "Middle Left"), SteeringMotor(sm_mr_p, sm_mr_n, pr_mr, "Middle Right")
+    # initialising the middle left and middle right driving motors
+    SM_ML, SM_MR = DrivingMotor(dm_ml_p, dm_ml_n, SM_ML), DrivingMotor(dm_mr_p, dm_mr_n, SM_MR)
+
+    # __BACK MOTORS__
+    # initialising the back left and back right steering motors
+    SM_BL, SM_BR = SteeringMotor(sm_bl_p, sm_bl_n, pr_bl, "Back Left"), SteeringMotor(sm_br_p, sm_br_n, pr_br, "Back Right")
+    # initialising the back left and back right driving motors
+    SM_BL, SM_BR = DrivingMotor(dm_bl_p, dm_bl_n, SM_BL), DrivingMotor(dm_br_p, dm_br_n, SM_BR)
 
     fl.goto(75.488)  # moving the front left steering motor to 75 degrees
