@@ -1,0 +1,45 @@
+[33mcommit 52073025895929fae25e34c26c56659ee8805588[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Alpha3125 <girija4m@gmail.com>
+Date:   Tue May 10 00:37:18 2022 +0530
+
+    Mostly done except SteeringMotor.goto()
+
+[1mdiff --git a/Rough/motors.py b/Rough/motors.py[m
+[1mindex 7800e75..97a0d15 100644[m
+[1m--- a/Rough/motors.py[m
+[1m+++ b/Rough/motors.py[m
+[36m@@ -171,7 +171,8 @@[m [mclass SteeringMotor:[m
+         # of the motor with respect to the new distance (θnew) and call move(). Continue until the[m
+         # [required position ± ERROR (defined at the beginning)] is reached.[m
+         #[m
+[31m-        while():[m
+[32m+[m[32m        v = 100   # initializing to full speed[m
+[32m+[m[32m        for i in range(0, 1, 0.2):[m
+             difference = position - self.get_position[m
+             move(v)     # incomplete[m
+         print(f"The {self.name} steering motor moved to {round(position, 2)}° from {round(started_from, 2)}°")  # comment this line on completion[m
+[36m@@ -318,6 +319,23 @@[m [mclass DrivingMotor:[m
+ if __name__ == "__main__":[m
+     from settings import *[m
+     # fl = SteeringMotor(smflp, smflm, smflpot, "Front Left")  # initialising the front left steering motor[m
+[31m-    fl = SteeringMotor(None, None, None, "Front Left")  # initialising the front left steering motor[m
+[32m+[m
+[32m+[m[32m    # __FRONT MOTORS__[m
+[32m+[m[32m    # initialising the front left and front right steering motors[m
+[32m+[m[32m    SM_FL, SM_FR = SteeringMotor(sm_fl_p, sm_fl_n, pr_fl, "Front Left"), SteeringMotor(sm_fr_p, sm_fr_n, pr_fr, "Front Right")[m
+[32m+[m[32m    # initialising the front left and front right driving motors[m
+[32m+[m[32m    DM_FL, DM_FR = DrivingMotor(dm_fl_p, dm_fl_n, SM_FL), DrivingMotor(dm_fr_p, dm_fr_n, SM_FR)[m
+[32m+[m
+[32m+[m[32m    # __MIDDLE MOTORS__[m
+[32m+[m[32m    # initialising the middle left and middle right steering motors[m
+[32m+[m[32m    SM_ML, SM_MR = SteeringMotor(sm_ml_p, sm_ml_n, pr_ml, "Middle Left"), SteeringMotor(sm_mr_p, sm_mr_n, pr_mr, "Middle Right")[m
+[32m+[m[32m    # initialising the middle left and middle right driving motors[m
+[32m+[m[32m    SM_ML, SM_MR = DrivingMotor(dm_ml_p, dm_ml_n, SM_ML), DrivingMotor(dm_mr_p, dm_mr_n, SM_MR)[m
+[32m+[m
+[32m+[m[32m    # __BACK MOTORS__[m
+[32m+[m[32m    # initialising the back left and back right steering motors[m
+[32m+[m[32m    SM_BL, SM_BR = SteeringMotor(sm_bl_p, sm_bl_n, pr_bl, "Back Left"), SteeringMotor(sm_br_p, sm_br_n, pr_br, "Back Right")[m
+[32m+[m[32m    # initialising the back left and back right driving motors[m
+[32m+[m[32m    SM_BL, SM_BR = DrivingMotor(dm_bl_p, dm_bl_n, SM_BL), DrivingMotor(dm_br_p, dm_br_n, SM_BR)[m
+ [m
+     fl.goto(75.488)  # moving the front left steering motor to 75 degrees[m

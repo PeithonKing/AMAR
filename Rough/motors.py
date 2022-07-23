@@ -28,7 +28,7 @@ class SteeringMotor:
         get_position() :
             Returns current position of the steering motor in degrees.
         move(v,t=1) :
-            Dynamically rotates the steering motor base on velocity and time.
+            Dynamically rotates the steering motor based on velocity and time.
         goto(position) :
             Rotates the motor to a specific angle at full speed.
     """
@@ -107,7 +107,7 @@ class SteeringMotor:
         pd : type float
             Potential that has to be be given to the plus(pwm pin). Calculates as-
                     pd = v/100.0      to implement positive/counterclockwise velocity
-                    pd = 1+v/100.0    to implement negative/cloclwise velocity (*v is itself negative)
+                    pd = 1+v/100.0    to implement negative/clockwise velocity (here, v is itself negative)
             Note: PWM output in pyfirmata takes values from 0 to 1
                   This translates to 0V to 5V in Arduino
 
@@ -151,7 +151,7 @@ class SteeringMotor:
         difference : type float
             The required angle to rotate.
             If difference > 0
-                then move counter clockwise by difference (in degrees)
+                then move counter-clockwise by difference (in degrees)
             If difference < 0
                 then move clockwise by diffrence (in degrees)
 
@@ -161,6 +161,7 @@ class SteeringMotor:
 
         """
         started_from = self.get_position()
+        error=0 #need to be updated
         # write the appropriate docstrings here
         # position is a float/integer between 0 and 360 degrees
         # objective of this function is to move the steering motor to the required position
@@ -172,9 +173,12 @@ class SteeringMotor:
         # [required position ± ERROR (defined at the beginning)] is reached.
         #
         v = 100   # initializing to full speed
-        for i in range(0, 1, 0.2):
-            difference = position - self.get_position
-            move(v)     # incomplete
+        while(True):    #move() is called atleast once
+            self.move(v)
+            difference = position - self.get_position()
+            #incomplete
+            if abs(difference) <= error:
+                break
         print(f"The {self.name} steering motor moved to {round(position, 2)}° from {round(started_from, 2)}°")  # comment this line on completion
 
 
